@@ -80,8 +80,62 @@ function Index() {
   const [country, setCountry] = useState("Italy");
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Cursor-follow glow (Gemini-style trailing blob)
+  const glowRef = useRef<HTMLDivElement>(null);
+  const trailRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const trail = { x: target.x, y: target.y };
+    let raf = 0;
+    const onMove = (e: MouseEvent) => {
+      target.x = e.clientX;
+      target.y = e.clientY;
+      if (glowRef.current) {
+        glowRef.current.style.transform = `translate3d(${e.clientX - 200}px, ${e.clientY - 200}px, 0)`;
+      }
+    };
+    const tick = () => {
+      trail.x += (target.x - trail.x) * 0.08;
+      trail.y += (target.y - trail.y) * 0.08;
+      if (trailRef.current) {
+        trailRef.current.style.transform = `translate3d(${trail.x - 300}px, ${trail.y - 300}px, 0)`;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    window.addEventListener("mousemove", onMove);
+    raf = requestAnimationFrame(tick);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
-    <div className="bg-bone text-ink">
+    <div className="bg-bone text-ink relative overflow-x-hidden">
+      {/* Cursor-follow aurora */}
+      <div
+        ref={trailRef}
+        aria-hidden
+        className="pointer-events-none fixed top-0 left-0 z-[60] h-[600px] w-[600px] rounded-full opacity-40 mix-blend-multiply"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(196,164,132,0.55) 0%, rgba(45,58,48,0.25) 40%, transparent 70%)",
+          filter: "blur(40px)",
+          willChange: "transform",
+        }}
+      />
+      <div
+        ref={glowRef}
+        aria-hidden
+        className="pointer-events-none fixed top-0 left-0 z-[61] h-[400px] w-[400px] rounded-full opacity-50 mix-blend-screen"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(226,226,217,0.45) 0%, rgba(196,164,132,0.25) 35%, transparent 65%)",
+          filter: "blur(20px)",
+          willChange: "transform",
+          transition: "transform 0.08s linear",
+        }}
+      />
       {/* Announcement bar */}
       <div className="bg-moss text-bone text-center py-2.5 text-[10px] uppercase tracking-[0.35em] font-medium">
         Organic — Functional — Vegan
