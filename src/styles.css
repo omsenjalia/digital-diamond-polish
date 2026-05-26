@@ -13,12 +13,12 @@
   --color-moss: #2d3a30;
   --color-stone: #e2e2d9;
   --color-sand: #c4a484;
-}
 
-@theme inline {
-  --color-background: var(--color-bone);
-  --color-foreground: var(--color-ink);
-  --color-border: var(--color-stone);
+  --animate-aurora: aurora 18s ease-in-out infinite;
+  --animate-shimmer: shimmer 6s linear infinite;
+  --animate-float: float 9s ease-in-out infinite;
+  --animate-sweep: sweep 2.2s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @layer base {
@@ -35,4 +35,103 @@
     background-color: var(--color-moss);
     color: var(--color-bone);
   }
+}
+
+@keyframes aurora {
+  0%, 100% { transform: translate3d(-10%, -10%, 0) rotate(0deg) scale(1); }
+  33% { transform: translate3d(15%, 5%, 0) rotate(120deg) scale(1.15); }
+  66% { transform: translate3d(-5%, 15%, 0) rotate(240deg) scale(0.95); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes sweep {
+  0% { transform: translateX(-120%) skewX(-12deg); }
+  100% { transform: translateX(220%) skewX(-12deg); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Gemini-style flowing aurora background */
+.ai-aurora {
+  position: absolute;
+  inset: -30%;
+  pointer-events: none;
+  filter: blur(60px);
+  opacity: 0.55;
+  background:
+    radial-gradient(circle at 20% 30%, #c4a484 0%, transparent 40%),
+    radial-gradient(circle at 75% 60%, #2d3a30 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, #d4b896 0%, transparent 35%),
+    conic-gradient(from 0deg at 50% 50%, #c4a484, #2d3a30, #e2e2d9, #c4a484);
+  animation: aurora 22s ease-in-out infinite;
+}
+
+/* Shimmer gradient text — like Gemini's "Thinking" headline */
+.ai-shimmer-text {
+  background: linear-gradient(
+    110deg,
+    var(--color-ink) 20%,
+    var(--color-sand) 45%,
+    var(--color-moss) 55%,
+    var(--color-ink) 80%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+/* Sweep highlight on hover (buttons, cards) */
+.ai-sweep {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.ai-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: translateX(-120%) skewX(-12deg);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+}
+.ai-sweep:hover::after {
+  transform: translateX(220%) skewX(-12deg);
+}
+
+/* Conic border ring (Gemini gradient ring) */
+.ai-ring {
+  position: relative;
+}
+.ai-ring::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--angle, 0deg), #c4a484, #2d3a30, #e2e2d9, #c4a484);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: aurora 8s linear infinite;
+  pointer-events: none;
+}
+
+.ai-float { animation: float 9s ease-in-out infinite; }
+.ai-fade-up { animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@theme inline {
+  --color-background: var(--color-bone);
+  --color-foreground: var(--color-ink);
+  --color-border: var(--color-stone);
 }
