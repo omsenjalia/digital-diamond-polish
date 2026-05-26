@@ -9,6 +9,13 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import "@fontsource/playfair-display/400.css";
+import "@fontsource/playfair-display/400-italic.css";
+import "@fontsource/playfair-display/700.css";
+import "@fontsource/inter/300.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
 
 function NotFoundComponent() {
   return (
@@ -72,14 +79,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "99ML — Carry-on Grooming Essentials, Made in Italy" },
+      { name: "description", content: "Premium organic, vegan grooming essentials sized for international transit. Made in Italy, under 100ml, recyclable — built for the modern traveler." },
+      { property: "og:title", content: "99ML — Carry-on Grooming Essentials" },
+      { property: "og:description", content: "Premium organic, vegan grooming essentials for the modern traveler. Made in Italy." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
