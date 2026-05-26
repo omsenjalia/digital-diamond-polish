@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
 import heroImg from "../assets/hero.jpg";
+import videoThumb from "../assets/official/video-thumb.jpg";
 import allProducts from "../assets/official/all-products.png";
 import hairStyling from "../assets/official/hair-styling.png";
 import beardImg from "../assets/official/beard.jpg";
@@ -293,6 +294,32 @@ function Index() {
               — Dutyfreemag
             </cite>
           </blockquote>
+        </div>
+      </section>
+
+      {/* Intro video */}
+      <section className="py-24 px-6 bg-bone">
+        <div className="container mx-auto max-w-5xl text-center mb-10">
+          <span className="block text-[10px] uppercase tracking-[0.35em] mb-3 text-moss">Watch</span>
+          <h2 className="font-serif text-4xl md:text-5xl">Introducing <span className="italic">99ML.</span></h2>
+          <p className="text-ink/60 mt-4 max-w-xl mx-auto">
+            Premium TSA-approved men's travel grooming kits — organic, vegan, cruelty-free, and recyclable.
+          </p>
+        </div>
+        <div className="container mx-auto max-w-5xl">
+          <a
+            href="https://www.99ml.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="ai-sweep relative block aspect-video overflow-hidden bg-ink group"
+          >
+            <img src={videoThumb} alt="Introduction to 99ML video preview" loading="lazy" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="ai-ring rounded-full w-20 h-20 md:w-24 md:h-24 flex items-center justify-center bg-bone/95 text-ink transition-transform group-hover:scale-110">
+                <svg width="22" height="26" viewBox="0 0 22 26" fill="currentColor" aria-hidden><path d="M0 0l22 13L0 26z"/></svg>
+              </span>
+            </div>
+          </a>
         </div>
       </section>
 
