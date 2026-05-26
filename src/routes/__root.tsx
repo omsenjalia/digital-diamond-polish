@@ -81,10 +81,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "99ML — Carry-on Grooming Essentials, Made in Italy" },
       { name: "description", content: "Premium organic, vegan grooming essentials sized for international transit. Made in Italy, under 100ml, recyclable — built for the modern traveler." },
-      { property: "og:title", content: "99ML — Carry-on Grooming Essentials" },
-      { property: "og:description", content: "Premium organic, vegan grooming essentials for the modern traveler. Made in Italy." },
+      { property: "og:title", content: "99ML — Carry-on Grooming Essentials, Made in Italy" },
+      { property: "og:description", content: "Premium organic, vegan grooming essentials sized for international transit. Made in Italy, under 100ml, recyclable — built for the modern traveler." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "99ML — Carry-on Grooming Essentials, Made in Italy" },
+      { name: "twitter:description", content: "Premium organic, vegan grooming essentials sized for international transit. Made in Italy, under 100ml, recyclable — built for the modern traveler." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0a10186c-0833-49e0-8e45-494224cdb035/id-preview-2d48164f--c45b61fb-7ab6-4c17-a818-488c949b88a1.lovable.app-1779794414809.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0a10186c-0833-49e0-8e45-494224cdb035/id-preview-2d48164f--c45b61fb-7ab6-4c17-a818-488c949b88a1.lovable.app-1779794414809.png" },
     ],
     links: [
       {
