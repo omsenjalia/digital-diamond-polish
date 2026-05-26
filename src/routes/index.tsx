@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 
-import heroImg from "../assets/official/hero.png";
+import heroImg from "../assets/hero.jpg";
+import officialHero from "../assets/official/hero.png";
 import allProducts from "../assets/official/all-products.png";
 import hairStyling from "../assets/official/hair-styling.png";
 import beardImg from "../assets/official/beard.jpg";
