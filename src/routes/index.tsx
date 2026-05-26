@@ -1,86 +1,183 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 
-import heroImg from "../assets/hero.jpg";
-import productHair from "../assets/product-hair.jpg";
-import productSkincare from "../assets/product-skincare.jpg";
-import productBeard from "../assets/product-beard.jpg";
-import productFragrance from "../assets/product-fragrance.jpg";
-import botanicalsImg from "../assets/botanicals.jpg";
-import catHairBeard from "../assets/cat-hair-beard.jpg";
-import catSkincare from "../assets/cat-skincare.jpg";
+import heroImg from "../assets/official/hero.png";
+import allProducts from "../assets/official/all-products.png";
+import hairStyling from "../assets/official/hair-styling.png";
+import beardImg from "../assets/official/beard.jpg";
+import fragrancesImg from "../assets/official/fragrances.jpg";
+import skincareImg from "../assets/official/skincare.png";
+import organicImg from "../assets/official/organic.png";
+import functionalImg from "../assets/official/functional.png";
+import securityImg from "../assets/official/security.png";
+import hairWax from "../assets/official/hair-wax.png";
+import beardShampoo from "../assets/official/beard-shampoo.jpg";
+import travelSet from "../assets/official/travel-set.jpg";
+import footerImg from "../assets/official/footer.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const products = [
-  { name: "Matte Texture Clay", category: "Hair & Styling", volume: "50ml", price: "€28.00", img: productHair },
-  { name: "Botanical Cleanser", category: "Skincare", volume: "99ml", price: "€32.00", img: productSkincare },
-  { name: "Alpine Cedar Oil", category: "Beard", volume: "30ml", price: "€45.00", img: productBeard },
-  { name: "Transit No. 1", category: "Fragrance", volume: "10ml", price: "€55.00", img: productFragrance },
+const collections = [
+  { name: "All Products", href: "#all", img: allProducts },
+  { name: "Hair & Styling", href: "#hair-styling", img: hairStyling },
+  { name: "Beard", href: "#beard", img: beardImg },
+  { name: "Fragrances", href: "#fragrances", img: fragrancesImg },
+  { name: "Skincare", href: "#skincare", img: skincareImg },
 ];
 
-const pillars: Array<[string, string]> = [
-  ["Origin", "100% Made in Italy"],
-  ["Ethos", "Vegan & Cruelty-Free"],
-  ["Packaging", "100% Recyclable Glass"],
-  ["Volume", "Cabin-Bag Friendly"],
+const pillars = [
+  {
+    img: organicImg,
+    title: "Organic & Vegan Ingredients",
+    body: "All products from the 99ML Series are made from Natural and Organic ingredients. All products are Vegan and registered with the Vegan Society. All products are recyclable.",
+  },
+  {
+    img: functionalImg,
+    title: "Focus on Functionality",
+    body: "All products are formulated and manufactured with the highest quality functional ingredients available to ensure a maximized adequate effect. Made in Italy.",
+  },
+  {
+    img: securityImg,
+    title: "Security Compliant Grooming",
+    body: "You can carry all products on board flights. 99ML is the world's first concept brand that addresses the global regulations on liquid carry-ons for airline passengers.",
+  },
+];
+
+const featured = [
+  {
+    img: hairWax,
+    name: "Hair Wax",
+    desc: "Medium strong wax that will enable you to softly sculpt your hair. Carnauba wax, organic bearberry and grape leaf extract.",
+    cta: "Shop Hair Wax",
+  },
+  {
+    img: beardShampoo,
+    name: "Beard Shampoo",
+    desc: "Gently cleanses your beard giving it a luxurious texture and fine finish. Organic aloe vera and ginseng.",
+    cta: "Shop Beard Shampoo",
+  },
+  {
+    img: travelSet,
+    name: "The 99ML Travel Set",
+    desc: "Contains Eau de Toilette, Soothing Shampoo and Shaving Gel — everything you need in cabin-bag format.",
+    cta: "Discover the Set",
+  },
+];
+
+const press = [
+  { title: "Size matters: Men's grooming brand 99ML launches with Dufry at Sharjah and Bengaluru airports", source: "Moodie Davitt Report" },
+  { title: "Men's grooming brand 99ML by Horstmann makes airport retail debut with Dufry", source: "GTR Magazine" },
+  { title: "99ML by Horstmann breaks into travel retail in partnership with Dufry", source: "TR Business" },
+  { title: "99ML by Horstmann partners with Dufry at two airports", source: "DFNI Online" },
+  { title: "99ML: featured in Pic de l'Aigle", source: "Pic de l'Aigle" },
+  { title: "99ML by Horstmann is flying high", source: "Dutyfreemag" },
 ];
 
 function Index() {
+  const [currency, setCurrency] = useState<"EUR" | "USD" | "CAD">("EUR");
+  const [country, setCountry] = useState("Italy");
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div className="bg-bone text-ink">
+      {/* Announcement bar */}
+      <div className="bg-moss text-bone text-center py-2.5 text-[10px] uppercase tracking-[0.35em] font-medium">
+        Organic — Functional — Vegan
+      </div>
+
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-bone/90 backdrop-blur-md border-b border-ink/5">
-        <div className="flex gap-8 text-[11px] uppercase tracking-[0.2em] font-medium">
-          <a href="#products" className="hover:text-sand transition-colors">Shop</a>
-          <a href="#series" className="hidden sm:inline hover:text-sand transition-colors">The 99ML Series</a>
+      <nav className="sticky top-0 z-50 bg-bone/95 backdrop-blur-md border-b border-ink/10">
+        <div className="container mx-auto px-6 grid grid-cols-3 items-center h-20">
+          <div className="flex items-center gap-6 text-[11px] uppercase tracking-[0.2em] font-medium">
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              className="md:hidden"
+              aria-label="Menu"
+            >
+              Menu
+            </button>
+            <div className="hidden md:flex gap-7">
+              <a href="#all" className="hover:text-sand transition-colors">Shop</a>
+              <a href="#hair-styling" className="hover:text-sand transition-colors">Hair</a>
+              <a href="#beard" className="hover:text-sand transition-colors">Beard</a>
+              <a href="#fragrances" className="hover:text-sand transition-colors">Fragrances</a>
+            </div>
+          </div>
+
+          <a href="#" className="font-serif text-3xl font-bold tracking-tight italic text-center">
+            99ML
+          </a>
+
+          <div className="flex items-center justify-end gap-5 text-[11px] uppercase tracking-[0.2em] font-medium">
+            <div className="hidden sm:flex items-center gap-2 border border-ink/15 rounded-full px-3 py-1.5">
+              <select
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                className="bg-transparent outline-none cursor-pointer text-[10px] tracking-[0.15em]"
+                aria-label="Country"
+              >
+                {["Italy","United States","United Kingdom","Germany","France","Canada","Switzerland","Japan","Singapore","UAE"].map((c) => (
+                  <option key={c}>{c}</option>
+                ))}
+              </select>
+              <span className="text-ink/30">|</span>
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value as "EUR" | "USD" | "CAD")}
+                className="bg-transparent outline-none cursor-pointer text-[10px] tracking-[0.15em]"
+                aria-label="Currency"
+              >
+                <option value="EUR">EUR €</option>
+                <option value="USD">USD $</option>
+                <option value="CAD">CAD $</option>
+              </select>
+            </div>
+            <a href="#" aria-label="Search" className="hidden sm:inline hover:text-sand transition-colors">Search</a>
+            <a href="#" aria-label="Account" className="hidden sm:inline hover:text-sand transition-colors">Account</a>
+            <a href="#" className="hover:text-sand transition-colors">Cart (0)</a>
+          </div>
         </div>
-        <div className="absolute left-1/2 -translate-x-1/2 font-serif text-2xl font-bold tracking-tight italic">
-          99ML
-        </div>
-        <div className="flex gap-8 text-[11px] uppercase tracking-[0.2em] font-medium">
-          <a href="#story" className="hidden sm:inline hover:text-sand transition-colors">Story</a>
-          <a href="#" className="hover:text-sand transition-colors">Cart (0)</a>
-        </div>
+
+        {menuOpen && (
+          <div className="md:hidden border-t border-ink/10 bg-bone px-6 py-4 flex flex-col gap-3 text-[11px] uppercase tracking-[0.2em]">
+            <a href="#all" onClick={() => setMenuOpen(false)}>Shop All</a>
+            <a href="#hair-styling" onClick={() => setMenuOpen(false)}>Hair & Styling</a>
+            <a href="#beard" onClick={() => setMenuOpen(false)}>Beard</a>
+            <a href="#fragrances" onClick={() => setMenuOpen(false)}>Fragrances</a>
+            <a href="#skincare" onClick={() => setMenuOpen(false)}>Skincare</a>
+          </div>
+        )}
       </nav>
 
       {/* Hero */}
-      <section className="relative h-[85vh] min-h-[600px] flex items-center overflow-hidden">
+      <section className="relative h-[78vh] min-h-[560px] flex items-end overflow-hidden bg-stone/30">
         <div className="absolute inset-0 z-0">
           <img
             src={heroImg}
-            alt="Premium 99ML grooming bottles on a textured stone surface in soft morning light"
-            width={1920}
-            height={1088}
-            className="w-full h-full object-cover"
+            alt="A modern man traveling with his 99ML travel grooming kit into a carry-on bag"
+            className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-bone/85 via-bone/55 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-bone via-bone/30 to-transparent" />
         </div>
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-2xl">
-            <span className="block text-[12px] uppercase tracking-[0.3em] mb-6 text-moss font-semibold">
-              Engineered for the Journey
+        <div className="container mx-auto px-6 relative z-10 pb-16">
+          <div className="max-w-xl">
+            <span className="block text-[11px] uppercase tracking-[0.3em] mb-5 text-moss font-semibold">
+              Premium Travel Grooming · Made in Italy
             </span>
-            <h1 className="font-serif text-6xl md:text-8xl leading-[1.1] mb-8">
-              Carry-on <br />
-              <span className="italic">Confidence.</span>
+            <h1 className="font-serif text-5xl md:text-7xl leading-[1.05] mb-6">
+              Engineered for <span className="italic">the Journey.</span>
             </h1>
-            <p className="text-lg mb-10 text-ink/70 max-w-md leading-relaxed">
-              Premium grooming essentials, sized for international transit. Organic, vegan, and made in
-              Italy for the modern nomad.
+            <p className="text-base md:text-lg mb-8 text-ink/70 max-w-md leading-relaxed">
+              Organic, vegan and security-compliant grooming essentials — sized for international cabin
+              transit, formulated in small batches in Italy.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a
-                href="#products"
-                className="px-10 py-4 bg-ink text-bone text-[11px] uppercase tracking-[0.2em] hover:bg-moss transition-colors"
-              >
-                Shop the Collection
+              <a href="#all" className="px-9 py-4 bg-ink text-bone text-[11px] uppercase tracking-[0.2em] hover:bg-moss transition-colors">
+                Shop the Series
               </a>
-              <a
-                href="#story"
-                className="px-10 py-4 border border-ink/20 text-ink text-[11px] uppercase tracking-[0.2em] hover:bg-ink hover:text-bone transition-all"
-              >
+              <a href="#story" className="px-9 py-4 border border-ink/30 text-ink text-[11px] uppercase tracking-[0.2em] hover:bg-ink hover:text-bone transition-all">
                 Our Philosophy
               </a>
             </div>
@@ -88,183 +185,177 @@ function Index() {
         </div>
       </section>
 
-      {/* Product Series */}
-      <section id="series" className="py-24 px-6">
+      {/* Collections Grid */}
+      <section id="all" className="py-24 px-6">
         <div className="container mx-auto">
-          <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
             <div>
-              <h2 className="font-serif text-4xl mb-2">The 99ML Series</h2>
-              <p className="text-ink/50 uppercase tracking-widest text-[10px]">
-                TSA Approved / Under 100ml / Zero Compromise
-              </p>
+              <span className="block text-[10px] uppercase tracking-[0.35em] mb-3 text-moss">Collections</span>
+              <h2 className="font-serif text-4xl md:text-5xl">Explore the 99ML Series</h2>
             </div>
-            <a
-              href="#products"
-              className="text-[11px] uppercase tracking-widest border-b border-ink/20 pb-1 hover:border-ink transition-colors self-start"
-            >
+            <a href="#all" className="text-[11px] uppercase tracking-widest border-b border-ink/30 pb-1 hover:border-ink self-start">
               View All Products
             </a>
           </div>
 
-          <div id="products" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-            {products.map((p) => (
-              <article key={p.name} className="group cursor-pointer">
-                <div className="aspect-[3/4] bg-stone/30 mb-6 overflow-hidden">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {collections.map((c) => (
+              <a key={c.name} href={c.href} className="group">
+                <div className="aspect-square bg-stone/30 mb-4 overflow-hidden">
                   <img
-                    src={p.img}
-                    alt={`${p.name} — ${p.category} ${p.volume}`}
-                    width={608}
-                    height={800}
+                    src={c.img}
+                    alt={c.name}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
-                <h3 className="font-serif text-xl mb-1">{p.name}</h3>
-                <p className="text-ink/40 text-xs mb-3">
-                  {p.category} • {p.volume}
-                </p>
-                <p className="font-medium">{p.price}</p>
-              </article>
+                <h3 className="font-serif text-lg text-center">{c.name}</h3>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Brand Pillars */}
-      <section id="story" className="bg-moss text-bone py-24">
-        <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-          <div className="space-y-12">
-            <div>
-              <h2 className="font-serif text-5xl mb-8 leading-tight">
-                Consciously Formulated. Travel Inspired.
-              </h2>
-              <p className="text-bone/70 text-lg leading-relaxed">
-                Every 99ML product is handcrafted in small batches near Parma, Italy. We combine traditional
-                apothecarial wisdom with modern sustainable practices to ensure your skin and the planet
-                remain preserved.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-x-8 gap-y-10">
-              {pillars.map(([label, value]) => (
-                <div key={label}>
-                  <span className="block text-[10px] uppercase tracking-[0.2em] mb-2 opacity-50">
-                    {label}
-                  </span>
-                  <p className="text-sm font-medium">{value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="relative aspect-[4/5]">
-            <img
-              src={botanicalsImg}
-              alt="Botanical ingredients — rosemary and cedar wood — on a marble slab in an Italian lab"
-              width={1024}
-              height={1280}
-              loading="lazy"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Categories */}
-      <section className="py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="group relative aspect-square md:aspect-auto md:h-[600px] overflow-hidden">
-            <img
-              src={catHairBeard}
-              alt="A man tending his beard in a sunlit luxury hotel bathroom"
-              width={1024}
-              height={1024}
-              loading="lazy"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-            />
-            <div className="absolute inset-0 bg-black/25 flex flex-col justify-end p-12">
-              <h3 className="text-bone font-serif text-4xl mb-4">Hair & Beard</h3>
-              <a href="#products" className="text-bone text-[11px] uppercase tracking-widest">
-                Explore Collection →
-              </a>
-            </div>
-          </div>
-          <div className="group relative aspect-square md:aspect-auto md:h-[600px] overflow-hidden">
-            <img
-              src={catSkincare}
-              alt="Minimalist bathroom shelf with premium 99ML skincare bottles and a folded towel"
-              width={1024}
-              height={1024}
-              loading="lazy"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-            />
-            <div className="absolute inset-0 bg-black/25 flex flex-col justify-end p-12">
-              <h3 className="text-bone font-serif text-4xl mb-4">Face & Skin</h3>
-              <a href="#products" className="text-bone text-[11px] uppercase tracking-widest">
-                Explore Collection →
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Press */}
-      <section className="py-24 bg-stone/30 border-y border-ink/5">
+      {/* Press quote */}
+      <section className="bg-stone/40 py-20 border-y border-ink/5">
         <div className="container mx-auto px-6 text-center">
-          <span className="block text-[10px] uppercase tracking-[0.4em] mb-8 text-ink/40">
-            As Seen In
-          </span>
           <blockquote className="max-w-4xl mx-auto">
-            <p className="font-serif text-3xl md:text-5xl italic leading-tight mb-8">
-              &ldquo;The definitive solution for the frequent flyer who refuses to compromise on his grooming
-              ritual. 99ML is pure functional luxury.&rdquo;
+            <p className="font-serif text-2xl md:text-4xl italic leading-snug mb-6">
+              &ldquo;The brand's range of grooming products is of the highest quality on the market. Made
+              in Italy, 99ML's items are vegan and recyclable. Its product range is not only highly
+              functional, but also organic.&rdquo;
             </p>
-            <cite className="not-italic text-[12px] uppercase tracking-[0.2em] font-semibold text-moss">
-              Dutyfreemag
+            <cite className="not-italic text-[11px] uppercase tracking-[0.3em] font-semibold text-moss">
+              — Dutyfreemag
             </cite>
           </blockquote>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-ink text-bone pt-24 pb-12">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
-            <div className="col-span-1 md:col-span-2">
-              <h2 className="font-serif text-3xl italic mb-6">99ML</h2>
-              <p className="text-bone/50 max-w-sm mb-8">
-                Premium Italian grooming essentials. Optimized for transit. Built for the modern traveler.
-              </p>
-              <div className="flex gap-6">
-                <a href="#" className="text-[10px] uppercase tracking-widest hover:text-sand transition-colors">Instagram</a>
-                <a href="#" className="text-[10px] uppercase tracking-widest hover:text-sand transition-colors">Journal</a>
-                <a href="#" className="text-[10px] uppercase tracking-widest hover:text-sand transition-colors">Stockists</a>
-              </div>
+      {/* Brand pillars */}
+      <section id="story" className="py-24 px-6">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <span className="block text-[10px] uppercase tracking-[0.35em] mb-3 text-moss">The 99ML Standard</span>
+            <h2 className="font-serif text-4xl md:text-5xl">Consciously Formulated.<br/><span className="italic">Travel Inspired.</span></h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {pillars.map((p) => (
+              <article key={p.title} className="text-center">
+                <div className="aspect-[4/3] bg-stone/20 mb-6 overflow-hidden flex items-center justify-center">
+                  <img src={p.img} alt={p.title} loading="lazy" className="w-full h-full object-cover" />
+                </div>
+                <h3 className="font-serif text-2xl mb-3">{p.title}</h3>
+                <p className="text-ink/70 text-sm leading-relaxed max-w-sm mx-auto">{p.body}</p>
+              </article>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <a href="#all" className="inline-block px-9 py-4 bg-ink text-bone text-[11px] uppercase tracking-[0.2em] hover:bg-moss transition-colors">
+              Shop Now
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured products */}
+      <section className="bg-moss text-bone">
+        {featured.map((f, i) => (
+          <div
+            key={f.name}
+            id={i === 0 ? "hair-styling" : i === 1 ? "beard" : "fragrances"}
+            className={`container mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-2 gap-16 items-center ${i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}
+          >
+            <div className="aspect-square bg-bone/5 overflow-hidden flex items-center justify-center">
+              <img src={f.img} alt={f.name} loading="lazy" className="w-full h-full object-cover" />
             </div>
             <div>
-              <h4 className="text-[11px] uppercase tracking-widest mb-6 font-semibold">Shop</h4>
-              <ul className="space-y-4 text-bone/60 text-sm">
-                <li><a href="#" className="hover:text-bone transition-colors">Hair & Styling</a></li>
-                <li><a href="#" className="hover:text-bone transition-colors">Beard Care</a></li>
-                <li><a href="#" className="hover:text-bone transition-colors">Skincare</a></li>
-                <li><a href="#" className="hover:text-bone transition-colors">Fragrances</a></li>
+              <span className="block text-[10px] uppercase tracking-[0.35em] mb-4 opacity-60">Featured</span>
+              <h3 className="font-serif text-4xl md:text-5xl mb-6">{f.name}</h3>
+              <p className="text-bone/75 text-lg leading-relaxed mb-8 max-w-md">{f.desc}</p>
+              <a href="#" className="inline-block px-9 py-4 bg-bone text-ink text-[11px] uppercase tracking-[0.2em] hover:bg-sand transition-colors">
+                {f.cta}
+              </a>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* Press list */}
+      <section className="py-24 px-6">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-14">
+            <span className="block text-[10px] uppercase tracking-[0.35em] mb-3 text-moss">In The Press</span>
+            <h2 className="font-serif text-4xl md:text-5xl">99ML, on record.</h2>
+          </div>
+          <ul className="divide-y divide-ink/10 border-y border-ink/10">
+            {press.map((p) => (
+              <li key={p.title}>
+                <a href="#" className="flex flex-col md:flex-row md:items-center justify-between gap-3 py-6 group">
+                  <span className="font-serif text-lg md:text-xl group-hover:italic transition-all max-w-2xl">{p.title}</span>
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-moss font-semibold whitespace-nowrap">{p.source} →</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Footer band image */}
+      <section className="relative h-[55vh] min-h-[400px] overflow-hidden">
+        <img src={footerImg} alt="99ML premium men's travel grooming essentials" className="w-full h-full object-cover" />
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-ink text-bone pt-20 pb-10">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <div className="md:col-span-2">
+              <h2 className="font-serif text-3xl italic mb-5">99ML</h2>
+              <p className="text-bone/55 max-w-sm mb-6 leading-relaxed">
+                Premium Italian grooming essentials. Organic. Vegan. Security-compliant. Made for the
+                modern traveler.
+              </p>
+              <form className="flex max-w-sm border-b border-bone/30 pb-2">
+                <input
+                  type="email"
+                  placeholder="Email for our journal"
+                  className="bg-transparent flex-1 outline-none text-sm placeholder:text-bone/40"
+                />
+                <button type="submit" className="text-[10px] uppercase tracking-[0.3em] hover:text-sand transition-colors">
+                  Subscribe →
+                </button>
+              </form>
+            </div>
+            <div>
+              <h4 className="text-[11px] uppercase tracking-widest mb-5 font-semibold">Shop</h4>
+              <ul className="space-y-3 text-bone/60 text-sm">
+                <li><a href="#all" className="hover:text-bone">All Products</a></li>
+                <li><a href="#hair-styling" className="hover:text-bone">Hair & Styling</a></li>
+                <li><a href="#beard" className="hover:text-bone">Beard</a></li>
+                <li><a href="#fragrances" className="hover:text-bone">Fragrances</a></li>
+                <li><a href="#skincare" className="hover:text-bone">Skincare</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-[11px] uppercase tracking-widest mb-6 font-semibold">Customer</h4>
-              <ul className="space-y-4 text-bone/60 text-sm">
-                <li><a href="#" className="hover:text-bone transition-colors">Shipping Info</a></li>
-                <li><a href="#" className="hover:text-bone transition-colors">Travel Guide</a></li>
-                <li><a href="#" className="hover:text-bone transition-colors">Returns</a></li>
-                <li><a href="#" className="hover:text-bone transition-colors">Contact</a></li>
+              <h4 className="text-[11px] uppercase tracking-widest mb-5 font-semibold">Customer</h4>
+              <ul className="space-y-3 text-bone/60 text-sm">
+                <li><a href="#" className="hover:text-bone">Search</a></li>
+                <li><a href="#" className="hover:text-bone">Shipping & Returns</a></li>
+                <li><a href="#" className="hover:text-bone">Contact</a></li>
+                <li><a href="#" className="hover:text-bone">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-bone">Terms of Service</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-bone/10 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-[10px] text-bone/30 uppercase tracking-[0.2em]">
-              © 2026 99ML Grooming. Made in Italy.
+          <div className="border-t border-bone/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-[10px] text-bone/40 uppercase tracking-[0.2em]">
+              © 2026 99ML by Horstmann. Made in Italy.
             </p>
-            <div className="flex gap-8">
-              <a href="#" className="text-[10px] text-bone/30 uppercase tracking-[0.2em] hover:text-bone transition-colors">Privacy Policy</a>
-              <a href="#" className="text-[10px] text-bone/30 uppercase tracking-[0.2em] hover:text-bone transition-colors">Terms of Service</a>
+            <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-bone/40">
+              <span>{country}</span>
+              <span>|</span>
+              <span>{currency}</span>
             </div>
           </div>
         </div>
