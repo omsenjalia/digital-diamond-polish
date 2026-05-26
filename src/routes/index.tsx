@@ -100,7 +100,7 @@ function Index() {
               Menu
             </button>
             <div className="hidden md:flex gap-7">
-              <a href="#all" className="hover:text-sand transition-colors">Shop</a>
+              <Link to="/shop" className="hover:text-sand transition-colors">Shop</Link>
               <a href="#hair-styling" className="hover:text-sand transition-colors">Hair</a>
               <a href="#beard" className="hover:text-sand transition-colors">Beard</a>
               <a href="#fragrances" className="hover:text-sand transition-colors">Fragrances</a>
