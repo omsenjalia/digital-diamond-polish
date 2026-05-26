@@ -195,10 +195,6 @@ function Index() {
         </div>
       </section>
 
-      {/* Secondary banner with official campaign image */}
-      <section className="relative">
-        <img src={officialHero} alt="A modern man traveling with his 99ML travel grooming kit" className="w-full h-[55vh] min-h-[380px] object-cover" />
-      </section>
 
       {/* Collections Grid */}
       <section id="all" className="py-24 px-6">
