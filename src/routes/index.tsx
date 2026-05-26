@@ -152,38 +152,52 @@ function Index() {
         )}
       </nav>
 
-      {/* Hero */}
-      <section className="relative h-[78vh] min-h-[560px] flex items-end overflow-hidden bg-stone/30">
+      {/* Hero — editorial with Gemini-style aurora */}
+      <section className="relative h-[85vh] min-h-[600px] flex items-center overflow-hidden bg-bone">
         <div className="absolute inset-0 z-0">
           <img
             src={heroImg}
-            alt="A modern man traveling with his 99ML travel grooming kit into a carry-on bag"
-            className="w-full h-full object-cover object-center"
+            alt="Premium 99ML grooming bottles on a textured stone surface in soft morning light"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-bone via-bone/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-bone/90 via-bone/55 to-transparent" />
+          <div className="ai-aurora" />
         </div>
-        <div className="container mx-auto px-6 relative z-10 pb-16">
-          <div className="max-w-xl">
-            <span className="block text-[11px] uppercase tracking-[0.3em] mb-5 text-moss font-semibold">
-              Premium Travel Grooming · Made in Italy
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-2xl ai-fade-up">
+            <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] mb-6 text-moss font-semibold">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-sand ai-float" />
+              Engineered for the Journey
             </span>
-            <h1 className="font-serif text-5xl md:text-7xl leading-[1.05] mb-6">
-              Engineered for <span className="italic">the Journey.</span>
+            <h1 className="font-serif text-6xl md:text-8xl leading-[1.05] mb-8">
+              Carry-on <br />
+              <span className="italic ai-shimmer-text">Confidence.</span>
             </h1>
-            <p className="text-base md:text-lg mb-8 text-ink/70 max-w-md leading-relaxed">
-              Organic, vegan and security-compliant grooming essentials — sized for international cabin
-              transit, formulated in small batches in Italy.
+            <p className="text-lg mb-10 text-ink/70 max-w-md leading-relaxed">
+              Premium grooming essentials, sized for international transit. Organic, vegan, and made in
+              Italy for the modern nomad.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="#all" className="px-9 py-4 bg-ink text-bone text-[11px] uppercase tracking-[0.2em] hover:bg-moss transition-colors">
-                Shop the Series
-              </a>
-              <a href="#story" className="px-9 py-4 border border-ink/30 text-ink text-[11px] uppercase tracking-[0.2em] hover:bg-ink hover:text-bone transition-all">
+              <Link
+                to="/shop"
+                className="ai-sweep px-10 py-4 bg-ink text-bone text-[11px] uppercase tracking-[0.2em] hover:bg-moss transition-colors"
+              >
+                Shop the Collection
+              </Link>
+              <a
+                href="#story"
+                className="ai-sweep px-10 py-4 border border-ink/20 text-ink text-[11px] uppercase tracking-[0.2em] hover:bg-ink hover:text-bone transition-all"
+              >
                 Our Philosophy
               </a>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Secondary banner with official campaign image */}
+      <section className="relative">
+        <img src={officialHero} alt="A modern man traveling with his 99ML travel grooming kit" className="w-full h-[55vh] min-h-[380px] object-cover" />
       </section>
 
       {/* Collections Grid */}
